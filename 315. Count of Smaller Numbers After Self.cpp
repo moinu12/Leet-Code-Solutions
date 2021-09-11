@@ -56,22 +56,23 @@ public:
     }
     vector<int> countSmaller(vector<int>& nums)
     {
-        for (int i = 1; i<=nums.size(); i++)
+        int n = nums.size() ;
+        for (int i = 1; i<= n ; i++)
         {
             N[i].V = nums[i-1];
             N[i].ind = i;
         }
 
-        sort(&N[1], &N[nums.size() + 1], cmp);
+        sort(&N[1], &N[n + 1], cmp);
 
         tree.resize(100005*4, 0 ) ;
-        res.resize(nums.size(), 0);
+        res.resize( n , 0 );
 
-        for (int i = 1; i<=nums.size(); i++)
+        for (int i = 1; i <= n; i++)
         {
 
-            res[N[i].ind - 1] = query(1, 1, nums.size(), N[i].ind, nums.size());
-            update(1, 1, nums.size(), N[i].ind);
+            res[N[i].ind - 1] = query(1, 1, n , N[i].ind, n);
+            update(1, 1, n , N[i].ind);
         }
 
         return res;
